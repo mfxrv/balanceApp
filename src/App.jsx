@@ -1,33 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react'
+import Splash from './components/Splash.jsx'  // Importa el splash
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
   const [count, setCount] = useState(0)
+
+  // Simula la carga, en producción puedes esperar a datos, assets, etc.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000) // 2 segundos de splash, ajusta a tu gusto
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (isLoading) {
+    return <Splash />
+  }
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {/* Aquí tu contenido normal */}
+        <h1 style={{ textAlign: 'center', backgroundColor: '#a5cc7f', padding: '10px', borderRadius: '8px', color: 'white' }}>
+          Balance+
+        </h1>
+        <h1 style={{ textAlign: 'center', backgroundColor: '#a5cc7f', padding: '10px', borderRadius: '8px', color: 'white' }}>
+          Control de Gastos Personales
+        </h1>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
