@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Balance+ Offline</title>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#a5cc7f" />
+    <style>
+        :root {
+            --brand: #a5cc7f;
+            --bg: #e0e0e0;
+            --text: #333;
+            --muted: #777;
+            --offline: #d32f2f;
+        }
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            margin: 0;
+            padding-top: 64px;
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .brand {
+            font-weight: 700;
+            color: var(--brand);
+            letter-spacing: 0.2px;
+        }
+        .nav a {
+            margin-left: 12px;
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px dashed transparent;
+        }
+        .nav a:hover {
+            border-bottom-color: #aaa;
+        }
+        .badge {
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+        .badge.offline {
+            background: var(--offline);
+            color: #fff;
+        }
+
+        .icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1rem;
+        }
+
+        h1 { color: var(--brand); }
+
+        p { color: var(--muted); }
+
+        .cta {
+            background: var(--brand);
+            color: #fff;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: transform 0.05s ease-in-out, box-shadow 0.2s ease-in-out;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        .cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar" role="banner" aria-label="Barra de estado offline">
+        <div class="brand">Balance+</div>
+        <nav class="nav" aria-label="Navegación rápida offline">
+            <a href="/#/lista" aria-label="Ver lista de gastos">Ver lista</a>
+            <a href="/#/" aria-label="Ir al dashboard">Dashboard</a>
+        </nav>
+        <span class="badge offline" aria-live="polite">Sin conexión</span>
+    </header>
+    <img class="icon" src="/icons/icon-192x192.png" alt="Balance+ Logo" />
+    <h1>Estás sin conexión</h1>
+    <p>Puedes seguir registrando tus gastos, se sincronizarán más tarde.</p>
+    <a class="cta" href="/#/form" role="button" aria-label="Ir al formulario principal">
+        Ir al formulario principal
+    </a>
+    <a class="cta" href="/#/" role="button" aria-label="Ir al dashboard">
+        Ir al dashboard
+    </a>
+    <a class="cta" href="/#/lista" role="button" aria-label="Ver gastos guardados">
+        Ver gastos guardados
+    </a>
+    <script>
+        window.addEventListener('online', () => {
+            try { window.location.href = '/#/'; } catch (e) {}
+        });
+    </script>
+</body>
+
+</html>
