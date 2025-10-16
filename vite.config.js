@@ -6,8 +6,12 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [react(),
     VitePWA({
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.js',
+      injectRegister: 'auto',
       registerType: "autoUpdate",
-      includeAssets: ['icon-192x192.png', 'icon-512x512.png', 'vite.svg'],
+      includeAssets: ['icons/icon-192x192.png', 'icons/icon-512x512.png', 'vite.svg', 'offline.html'],
       manifest: {
         "name": "Balance+ Control de Gastos Personales",
         "short_name": "Balance+",
@@ -101,20 +105,8 @@ export default defineConfig({
           }
         ]
       },
-      workbox: {
-        runtimeCaching: [
-          {
-            urlPattern: /^http:\/\/localhost:5173\/.*$/,
-            handler: "NetworkFirst",
-            options: {
-              cacheName: "local-cache",
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 86400,
-              },
-            },
-          },
-        ],
+      injectManifest: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
       },
     }),
   ],
