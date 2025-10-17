@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(),
     VitePWA({
       strategies: 'injectManifest',
-      srcDir: 'src',
+      srcDir: 'public',
       filename: 'sw.js',
       injectRegister: 'auto',
       registerType: "autoUpdate",

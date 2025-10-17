@@ -9,9 +9,11 @@ import { openDB } from 'idb'
 self.skipWaiting()
 clientsClaim()
 
+//Precachea recursos generados en build
 precacheAndRoute(self.__WB_MANIFEST)
 cleanupOutdatedCaches()
 
+//Navegacion de paginas, index.html desde precache (cache-first)
 registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')))
 
 registerRoute(
@@ -21,6 +23,8 @@ registerRoute(
     plugins: [new ExpirationPlugin({ maxEntries: 60, maxAgeSeconds: 7 * 24 * 60 * 60 })],
   })
 )
+
+//Stale-while-revalidate para imagenes y fuentes
 registerRoute(
   ({ request, url }) => request.destination === 'image' || url.pathname.startsWith('/icons/'),
   new StaleWhileRevalidate({
@@ -28,7 +32,6 @@ registerRoute(
     plugins: [new ExpirationPlugin({ maxEntries: 100, maxAgeSeconds: 30 * 24 * 60 * 60 })],
   })
 )
-
 registerRoute(
   ({ request }) => request.destination === 'font',
   new StaleWhileRevalidate({
@@ -37,6 +40,7 @@ registerRoute(
   })
 )
 
+//NetworkFirst para APIs GET con cache
 registerRoute(
   ({ url, request }) => url.pathname.startsWith('/api/') && request.method === 'GET',
   new NetworkFirst({
@@ -47,6 +51,7 @@ registerRoute(
   'GET'
 )
 
+//Fallback 
 setCatchHandler(async ({ event }) => {
   if (event.request.destination === 'document') {
     const cached = await caches.match('/offline.html')
@@ -93,6 +98,7 @@ self.addEventListener('notificationclick', (event) => {
   )
 })
 
+// Background sync para POST de gastos
 const bgSyncPlugin = new BackgroundSyncPlugin('expenses-queue', {
   maxRetentionTime: 24 * 60, 
 })
