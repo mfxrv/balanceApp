@@ -1,16 +1,67 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# balanceApp
 
-Currently, two official plugins are available:
+Ayudar a los usuarios a registrar, visualizar y analizar sus ingresos y egresos diarios, con una interfaz intuitiva y accesible desde cualquier dispositivo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## Authors
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [@mfxrv](https://www.github.com/mfxrv)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/mfxrv/balanceApp
+```
+
+Go to the project directory
+
+```bash
+  cd balanceApp
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+
+## Deployment
+
+To deploy this project run
+
+```bash
+  npm run build && npm run preview
+```
+
+
+## Features
+
+- week4/
+- Implementacion IndexedDB
+- Sincronización en segundo plano
+- Notificaciones push (desarrollo)
+
+
+## Documentation
+
+[Documentation](https://deepwiki.com/mfxrv/balanceApp)
+
+
+La aplicación implementa las siguientes capacidades principales:
+
+- Operación Offline-First
+- Persistencia de datos locales. Almacenamiento basado en IndexedDB para registros de gastos
+- Sincronización de fondo
+- PWA instalable. Instalación nativa similar a la aplicación a través de un manifiesto de aplicación web
+- Interfaz de usuario sensible. Aplicación de una sola página con enrutamiento del lado del cliente basado en hash

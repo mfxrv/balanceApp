@@ -81,7 +81,7 @@ self.addEventListener('push', (event) => {
   event.waitUntil(self.registration.showNotification(title, options))
 })
 
-// Clic en notificación: abrir o enfocar la app
+// Clic en notificación
 self.addEventListener('notificationclick', (event) => {
   event.notification.close()
   const targetUrl = event.notification?.data?.url || '/#/'
