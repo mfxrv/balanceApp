@@ -19,13 +19,11 @@ export async function requestNotificationPermissionAndSubscribe() {
 
     const vapid = import.meta?.env?.VITE_VAPID_PUBLIC_KEY
     if (!vapid) {
-      // Sin VAPID no nos suscribimos; el permiso sigue concedido.
       return { supported: true, permission, subscribed: false, reason: 'missing_vapid' }
     }
 
     const applicationServerKey = urlBase64ToUint8Array(vapid)
     const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey })
-    // En un entorno real, enviar "sub" al backend para guardar la suscripción.
     return { supported: true, permission, subscribed: !!sub }
   } catch (e) {
     return { supported: true, permission, error: e?.message || String(e) }

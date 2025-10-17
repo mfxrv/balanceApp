@@ -50,6 +50,7 @@ const ExpenseForm = ({ onAdd }) => {
             createdAt: new Date().toISOString(),
         };
 
+        //Registro de gastos en modo offline con Background Sync
         await onAdd(expense);
         if (typeof navigator !== 'undefined' && !navigator.onLine && 'serviceWorker' in navigator && 'SyncManager' in window) {
             try {
@@ -64,21 +65,33 @@ const ExpenseForm = ({ onAdd }) => {
     };
 
     return (
-        <form className="expense-form" onSubmit={handleSubmit}>
+        <form className="modern-form" onSubmit={handleSubmit}>
+            <p className="title">Registrar gasto</p>
+            <p className="message">Completa los datos para agregar un nuevo gasto.</p>
+
+            {/* Descripción */}
             <label>
-                Descripción
                 <input
+                    required
+                    placeholder=""
+                    type="text"
                     name="description"
                     value={form.description}
                     onChange={handleChange}
-                    placeholder="Ej. Factura Internet"
+                    className="input"
                 />
+                <span>Descripción</span>
             </label>
-            {errors.description && <small className="error">{errors.description}</small>}
+            {errors.description && (
+                <small className="error">{errors.description}</small>
+            )}
 
+            {/* Monto */}
             <label>
-                Monto
                 <input
+                    required
+                    placeholder=""
+                    type="text"
                     name="amount"
                     value={form.amount}
                     onChange={(e) => {
@@ -86,41 +99,66 @@ const ExpenseForm = ({ onAdd }) => {
                             handleChange(e);
                         }
                     }}
-                    placeholder="0.00"
+                    className="input"
                     inputMode="decimal"
                 />
+                <span>Monto</span>
             </label>
             {errors.amount && <small className="error">{errors.amount}</small>}
 
-            <div className="row-inline">
+            {/* Categoría, Método, Fecha */}
+            <div className="flex">
                 <label>
-                    Categoría
-                    <select name="category" value={form.category} onChange={handleChange}>
+                    <select
+                        required
+                        name="category"
+                        value={form.category}
+                        onChange={handleChange}
+                        className="input"
+                    >
                         {categories.map((c) => (
                             <option key={c} value={c}>
                                 {c}
                             </option>
                         ))}
                     </select>
+                    <span>Categoría</span>
                 </label>
 
                 <label>
-                    Método
-                    <select name="payment" value={form.payment} onChange={handleChange}>
+                    <select
+                        required
+                        name="payment"
+                        value={form.payment}
+                        onChange={handleChange}
+                        className="input"
+                    >
                         <option value="efectivo">Efectivo</option>
                         <option value="tarjeta">Tarjeta</option>
                         <option value="transferencia">Transferencia</option>
                     </select>
-                </label>
-
-                <label>
-                    Fecha
-                    <input type="date" name="date" value={form.date} onChange={handleChange} />
+                    <span>Método</span>
                 </label>
             </div>
 
-            <button type="submit" className="btn-primary">Guardar gasto</button>
+            <label>
+                <input
+                    required
+                    placeholder=""
+                    type="date"
+                    name="date"
+                    value={form.date}
+                    onChange={handleChange}
+                    className="input"
+                />
+                <span>Fecha</span>
+            </label>
+
+            <button type="submit" className="submit">
+                Guardar gasto
+            </button>
         </form>
+
     );
 };
 

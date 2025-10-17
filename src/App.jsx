@@ -87,7 +87,7 @@ function App() {
 
   if (route === '#/form') {
     return (
-      <div style={{ padding: 16 }}>
+      <div className="page">
         <h1 style={{ textAlign: 'center', backgroundColor: '#a5cc7f', padding: '10px', borderRadius: '8px', color: 'white' }}>
           Registrar gasto
         </h1>
@@ -106,7 +106,7 @@ function App() {
 
   if (route === '#/lista') {
     return (
-      <div style={{ padding: 16 }}>
+      <div className="page">
         <h1 style={{ textAlign: 'center', backgroundColor: '#a5cc7f', padding: '10px', borderRadius: '8px', color: 'white' }}>
           Lista de gastos guardados
         </h1>
@@ -137,8 +137,7 @@ function App() {
   }
 
   return (
-    <>
-      <div>
+    <div className="page">
         <h1 style={{ textAlign: 'center', backgroundColor: '#a5cc7f', padding: '10px', borderRadius: '8px', color: 'white' }}>
           Balance+
         </h1>
@@ -175,8 +174,7 @@ function App() {
             Limpiar gastos
           </button>
         </div>
-      </div>
-    </>
+    </div>
   )
 }
 
